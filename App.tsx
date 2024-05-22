@@ -281,7 +281,7 @@ const styles = StyleSheet.create({
     flex:1,
     width:210,
     fontSize: 12,
-    color: '#ff0d10',
+    color: 'red',
   },
   formActions: {
     flexDirection: 'row',
