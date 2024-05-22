@@ -1,4 +1,4 @@
-import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Keyboard, SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
 import * as Yup from 'yup'
@@ -113,7 +113,7 @@ export default function Password() {
                   <View style={styles.inputColumn}>
                     <Text style={styles.heading}>Password Length</Text>
                     {touched.PasswordLength && errors.PasswordLength && (
-                      <Text style={styles.errorText}>{errors.PasswordLength}</Text>
+                      <Text style={styles.errorText} numberOfLines={1}>{errors.PasswordLength}</Text>
                     )}
 
 
@@ -124,7 +124,11 @@ export default function Password() {
                     onChangeText={handleChange('PasswordLength')}     // if user change the text it should be change in password lemgth
                     placeholder='Ex. 8'
                     keyboardType='numeric'
+                    placeholderTextColor={'#000001'}
                   />
+                </View>
+                <View style={styles.suggestions}>
+                  <Text>Check all for strong password</Text>
                 </View>
                 <View style={styles.inputWrapper}>
                   <Text style={styles.heading}>Include lowrecase</Text>
@@ -132,7 +136,7 @@ export default function Password() {
                     <BouncyCheckbox
                       isChecked={lowerCase}
                       onPress={() => setLowercase(!lowerCase)}
-                      fillColor='red'
+                      fillColor='#000001'
                     />
                   </View>
 
@@ -143,7 +147,7 @@ export default function Password() {
                     <BouncyCheckbox
                       isChecked={upperCase}
                       onPress={() => setUppercase(!upperCase)}
-                      fillColor='red'
+                      fillColor='#000001'
                     />
                   </View>
                 </View>
@@ -153,7 +157,7 @@ export default function Password() {
                     <BouncyCheckbox
                       isChecked={number}
                       onPress={() => setNumber(!number)}
-                      fillColor='red'
+                      fillColor='#000001'
                     />
                   </View>
                 </View>
@@ -163,7 +167,7 @@ export default function Password() {
                     <BouncyCheckbox
                       isChecked={symbols}
                       onPress={() => setSymbols(!symbols)}
-                      fillColor='red'
+                      fillColor='#000001'
                     />
                   </View>
                 </View>
@@ -172,7 +176,10 @@ export default function Password() {
                   <TouchableOpacity
                     disabled={!isValid}
                     style={styles.primaryBtn}
-                    onPress={() => handleSubmit()}
+                    onPress={() => {handleSubmit();
+                      Keyboard.dismiss();
+                    }}
+                    
                   >
                     <Text style={styles.primaryBtnTxt}>
                       Generate Password
@@ -203,10 +210,7 @@ export default function Password() {
             <Text style={styles.description}>Long press to copy</Text>
             <Text selectable={true} style={styles.generatedPassword}>{password}</Text>
           </View>
-        ) : (<View style={[styles.card, styles.cardElevated]}>
-
-          <Text style={styles.generatedPassword} >6</Text>
-        </View>)}
+        ) : null}
 
       </SafeAreaView>
 
@@ -217,6 +221,9 @@ export default function Password() {
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
+    backgroundColor:'#96939B',
+    height:900,
+
   },
   formContainer: {
     margin: 8,
@@ -226,36 +233,53 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: '600',
     marginBottom: 15,
+    textAlign:'center',
+  },
+  suggestions:{
+    marginBottom:10,
+    marginStart:10,
+    
   },
   subTitle: {
     fontSize: 26,
     fontWeight: '600',
     marginBottom: 2,
+    color:'#000001'
   },
   description: {
     color: '#758283',
     marginBottom: 8,
   },
   heading: {
-    fontSize: 15,
+    fontSize: 17,
+    color: 'black'
+
   },
   inputWrapper: {
     marginBottom: 15,
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    backgroundColor: "#ffeef2",
+    padding: 8,
+    borderRadius: 20
   },
   inputColumn: {
     flexDirection: 'column',
+    color: '#ffeef2'
+
   },
   inputStyle: {
     padding: 8,
     width: '30%',
     borderWidth: 1,
     borderRadius: 4,
-    borderColor: '#16213e',
+    borderColor: '#000001',
+    color:'#000001'
   },
   errorText: {
+    flex:1,
+    width:210,
     fontSize: 12,
     color: '#ff0d10',
   },
@@ -268,21 +292,25 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8,
     marginHorizontal: 8,
-    backgroundColor: '#5DA3FA',
+    backgroundColor: '#0e0004',
   },
   primaryBtnTxt: {
     color: '#fff',
     textAlign: 'center',
-    fontWeight: '700',
+    fontWeight: '500',
   },
   secondaryBtn: {
     width: 120,
     padding: 10,
     borderRadius: 8,
     marginHorizontal: 8,
-    backgroundColor: '#CAD5E2',
+    backgroundColor: '#31081f',
+    alignItems:'center',
+    justifyContent:'center'
   },
   secondaryBtnTxt: {
+    color: '#fff',
+    fontWeight: '500',
     textAlign: 'center',
   },
   card: {
@@ -291,7 +319,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 12,
   },
   cardElevated: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#bfc0c0',
     elevation: 1,
     shadowOffset: {
       width: 1,
