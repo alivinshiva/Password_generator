@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import * as Yup from 'yup'
 import { Formik } from 'formik'
 import BouncyCheckbox from 'react-native-bouncy-checkbox'
+import AiPassword from './components/AiPassword'
 
 const passwordSchema = Yup.object().shape({
   PasswordLength: Yup.number()
@@ -176,10 +177,11 @@ export default function Password() {
                   <TouchableOpacity
                     disabled={!isValid}
                     style={styles.primaryBtn}
-                    onPress={() => {handleSubmit();
+                    onPress={() => {
+                      handleSubmit();
                       Keyboard.dismiss();
                     }}
-                    
+
                   >
                     <Text style={styles.primaryBtnTxt}>
                       Generate Password
@@ -211,9 +213,10 @@ export default function Password() {
             <Text selectable={true} style={styles.generatedPassword}>{password}</Text>
           </View>
         ) : null}
-
       </SafeAreaView>
 
+
+      <AiPassword />
     </ScrollView >
   )
 }
@@ -221,8 +224,8 @@ export default function Password() {
 const styles = StyleSheet.create({
   appContainer: {
     flex: 1,
-    backgroundColor:'#96939B',
-    height:900,
+    backgroundColor: '#96939B',
+    height: 900,
 
   },
   formContainer: {
@@ -233,18 +236,18 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: '600',
     marginBottom: 15,
-    textAlign:'center',
+    textAlign: 'center',
   },
-  suggestions:{
-    marginBottom:10,
-    marginStart:10,
-    
+  suggestions: {
+    marginBottom: 10,
+    marginStart: 10,
+
   },
   subTitle: {
     fontSize: 26,
     fontWeight: '600',
     marginBottom: 2,
-    color:'#000001'
+    color: '#000001'
   },
   description: {
     color: '#758283',
@@ -275,11 +278,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 4,
     borderColor: '#000001',
-    color:'#000001'
+    color: '#000001'
   },
   errorText: {
-    flex:1,
-    width:210,
+    flex: 1,
+    width: 210,
     fontSize: 12,
     color: 'red',
   },
@@ -305,8 +308,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginHorizontal: 8,
     backgroundColor: '#31081f',
-    alignItems:'center',
-    justifyContent:'center'
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   secondaryBtnTxt: {
     color: '#fff',
